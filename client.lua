@@ -1,12 +1,13 @@
 RegisterNetEvent('Saq:StartNothingToDo')
-AddEventHandler('Saq:StartNothingToDo', function()
-    StartNothingToDo()
+AddEventHandler('Saq:StartNothingToDo', function(time)
+    StartNothingToDo(time)
 end)
 
-function StartNothingToDo()
+function StartNothingToDo(time)
     local isInRestrictedState = true
     local playerPed = PlayerPedId()
     local vehicle = GetVehiclePedIsIn(playerPed, false)
+    if time == nil then time = 30 end
 
     local vehicles = {}
 
@@ -15,8 +16,8 @@ function StartNothingToDo()
     vehicles[vehicle] = initialSpeed
 
     Citizen.CreateThread(function()
-        TriggerEvent('pogressBar:drawBar', 30000, '<font size=5 color=orange>قدراتك محدوده حتى انتهاء الوقت')
-        Wait(30000) 
+        TriggerEvent('pogressBar:drawBar', time*1000, '<font size=5 color=orange>قدراتك محدوده حتى انتهاء الوقت')
+        Wait(time*1000) 
         isInRestrictedState = false 
         for k, v in pairs(vehicles) do
             SetEntityMaxSpeed(k, v)
