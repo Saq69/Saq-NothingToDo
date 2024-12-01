@@ -1,6 +1,7 @@
 Config = {}
 
 -- الأزرار الممنوعة
+-- عشان تاخذ ارقام الازرار: https://docs.fivem.net/docs/game-references/controls/
 Config["الأزرار الممنوعة"] = {
     [21] = true, -- الجري
     [22] = true, -- القفز
