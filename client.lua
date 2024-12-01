@@ -1,3 +1,16 @@
+local disabledControls = {
+    [21] = true, -- Sprinting
+    [22] = true, -- Jumping
+    [37] = true, -- Weapon wheel
+    [45] = true, -- Reloading
+    [24] = true, -- Punching
+    [69] = true, -- Melee attack (primary)
+    [92] = true, -- Melee attack (secondary)
+    [106] = true, -- Hitting with weapon
+    [140] = true, -- Reloading and melee attacks
+    [141] = true  -- Stabbing with knife
+}
+
 RegisterNetEvent('Saq:StartNothingToDo')
 AddEventHandler('Saq:StartNothingToDo', function(time)
     StartNothingToDo(time)
@@ -15,6 +28,7 @@ function StartNothingToDo(time)
 
     vehicles[vehicle] = initialSpeed
 
+
     Citizen.CreateThread(function()
         TriggerEvent('pogressBar:drawBar', time*1000, '<font size=5 color=orange>قدراتك محدوده حتى انتهاء الوقت')
         Wait(time*1000) 
@@ -31,18 +45,11 @@ function StartNothingToDo(time)
 
             SetEntityMaxSpeed(vehicle, 9.0)
             SetCurrentPedWeapon(playerPed, GetHashKey("WEAPON_UNARMED"), true) -- Remove weapon from hand
-            DisableControlAction(0, 21) -- Disable sprinting
-            DisableControlAction(0, 22) -- Disable jumping
-            DisableControlAction(0, 37) -- Disable weapon menu
-            DisableControlAction(0, 45) -- Disable reloading
-            DisableControlAction(0, 24) -- Disable punching
-            DisableControlAction(0, 69) -- Disable melee attack
-            DisableControlAction(0, 92) -- Disable melee attack (alternate)
             DisablePlayerFiring(playerPed, true) -- Disable shooting
-            DisableControlAction(0, 106, true) -- Disable hitting with weapons
-            DisableControlAction(0, 140, true) -- Disable reloading and melee attacks
-            DisableControlAction(0, 141, true) -- Disable stabbing with knife
-        end
 
+            for control, _ in pairs(disabledControls) do
+                DisableControlAction(0, control, true)
+            end
+        end
     end)
 end
