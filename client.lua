@@ -3,6 +3,11 @@ AddEventHandler('Saq:StartNothingToDo', function(time)
     StartNothingToDo(time)
 end)
 
+RegisterNetEvent('esx_ambulancejob:revive')
+AddEventHandler('esx_ambulancejob:revive', function()
+    StartNothingToDo(30)
+end)
+
 function StartNothingToDo(time)
     local isInRestrictedState = true
     local playerPed = PlayerPedId()
