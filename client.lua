@@ -13,7 +13,7 @@ end)
 -- Handle playerLoaded event
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
-    PlayerData = xPlayers
+    PlayerData = xPlayer
 end)
 
 -- Handle setJob event
